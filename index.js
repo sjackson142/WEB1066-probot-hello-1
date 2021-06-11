@@ -89,30 +89,30 @@ if (process.env.PROM_URL) {
   })
 
   app.on('check_run.completed', async context => {
-  app.log('check_run.completed -> called ')
+    app.log('check_run.completed -> called ')
   // app.log(JSON.stringify(context))
 
-  const observation = {
-    action: context.payload.action, // .action
-    name: context.payload.check_run.name,
-    check_run_status: context.payload.check_run.status,
-    check_run_conclusion: context.payload.check_run.conclusion,
-    repository_full_name: context.payload.repository.full_name, // repository.full_name
-    repository_name: context.payload.repository.name
-  }
-  const duration = new Date(context.payload.check_run.completed_at) - new             Date(context.payload.check_run.started_at)
+    const observation = {
+      action: context.payload.action, // .action
+      name: context.payload.check_run.name,
+      check_run_status: context.payload.check_run.status,
+      check_run_conclusion: context.payload.check_run.conclusion,
+      repository_full_name: context.payload.repository.full_name, // repository.full_name
+      repository_name: context.payload.repository.name
+    }
+    const duration = new Date(context.payload.check_run.completed_at) - new             Date(context.payload.check_run.started_at)
 
-  app.log('observation.action -> ' + observation.action)
-  app.log('observation.name -> ' + observation.name)
-  app.log('observation.check_run_status -> ' + observation.check_run_status)
-  app.log('observation.check_run_conclusion -> ' + observation.check_run_conclusion)
-  app.log('observation.repository_full_name -> ' + observation.repository_full_name)
-  app.log('observation.repository_name -> ' + observation.repository_name)
-  app.log('duration -> ' + duration)
+    app.log('observation.action -> ' + observation.action)
+    app.log('observation.name -> ' + observation.name)
+    app.log('observation.check_run_status -> ' + observation.check_run_status)
+    app.log('observation.check_run_conclusion -> ' + observation.check_run_conclusion)
+    app.log('observation.repository_full_name -> ' + observation.repository_full_name)
+    app.log('observation.repository_name -> ' + observation.repository_name)
+    app.log('duration -> ' + duration)
 
-  prom.observe(observation, duration)
-  app.log('check_run.created -> done')
-})
+    prom.observe(observation, duration)
+    app.log('check_run.created -> done')
+  })
 
 
   // For more information on building apps:
