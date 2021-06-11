@@ -79,7 +79,6 @@ if (process.env.PROM_URL) {
   }, 300000) // every 5 minutes (300000)
 }
 */
-
   // Your code here
   app.log('Yay, the app was loaded!')
 
@@ -100,7 +99,7 @@ if (process.env.PROM_URL) {
       repository_full_name: context.payload.repository.full_name, // repository.full_name
       repository_name: context.payload.repository.name
     }
-    const duration = new Date(context.payload.check_run.completed_at) - new             Date(context.payload.check_run.started_at)
+    const duration = new Date(context.payload.check_run.completed_at) - new Date(context.payload.check_run.started_at)
 
     app.log('observation.action -> ' + observation.action)
     app.log('observation.name -> ' + observation.name)
@@ -113,7 +112,6 @@ if (process.env.PROM_URL) {
     prom.observe(observation, duration)
     app.log('check_run.created -> done')
   })
-
 
   // For more information on building apps:
   // https://probot.github.io/docs/
